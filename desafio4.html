@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo4.css">
+    <title>Desafio 4</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logomarca">
+        </div>
+        <h1>Desafio 4!</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Página Inicial</a></li>
+            <li><a href="desafio1.html">Desafio 1</a></li>
+            <li><a href="desafio2.html">Desafio 2</a></li>
+            <li><a href="desafio3.html">Desafio 3</a></li>
+            <li><a href="desafio4.html">Desafio 4</a></li>
+        </ul>
+    </nav>
+ 
+    <main>
+        <div class="container">
+            <h1>Calculadora de Aumento Salarial</h1>
+            <label for="cargo">Cargo:</label>
+            <select id="cargo">
+                <option value="gerente">Gerente</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="operador">Operador</option>
+                <option value="outro">Outro</option>
+            </select>
+            <label for="salario">Salário (R$):</label>
+            <input type="number" id="salario" placeholder="Digite o salário">
+            <button onclick="calcularAumento()">Calcular</button>
+            <p id="resultado"></p>
+        </div>
+
+        <script src="4empresa.js"></script>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Meu Site. Todos os direitos reservados.</p>
+    </footer>
+
+
+    <div id="background"></div>
+</body>
+</html>

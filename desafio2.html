@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo2.css">
+    <title>Desafio 2</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logomarca">
+        </div>
+        <h1>Desafio 2!</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Página Inicial</a></li>
+            <li><a href="desafio1.html">Desafio 1</a></li>
+            <li><a href="desafio2.html">Desafio 2</a></li>
+            <li><a href="desafio3.html">Desafio 3</a></li>
+            <li><a href="#">Desafio 4</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="container">
+            <h1>Calculadora de Média</h1>
+            <label for="nota1">Nota 1:</label>
+            <input type="number" id="nota1" placeholder="Digite a primeira nota">
+            <label for="nota2">Nota 2:</label>
+            <input type="number" id="nota2" placeholder="Digite a segunda nota">
+            <label for="nota3">Nota 3:</label>
+            <input type="number" id="nota3" placeholder="Digite a terceira nota">
+            <label for="frequencia">Frequência (%):</label>
+            <input type="number" id="frequencia" placeholder="Digite a frequência">
+            <button onclick="calcularMedia()">Calcular Média</button>
+            <p id="resultado"></p>
+        </div>
+    
+        <script src="2media.js"></script>
+    </main>
+    <footer>
+        <p>&copy; 2023 Meu Site. Todos os direitos reservados.</p>
+    </footer>
+
+    <div id="background"></div>
+</body>
+</html>
