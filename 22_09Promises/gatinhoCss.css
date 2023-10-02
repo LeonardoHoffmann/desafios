@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 0 auto; 
+    max-width: 980px; 
+}
+
+.card {
+    max-width: 180px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.card img {
+    max-width: 160px;
+    max-height: 160px;
+    display: block;
+    margin: 0 auto;
+}
+
+#gerarNovasImagens {
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#gerarNovasImagens:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Gerenciador de Produtos</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Gerenciador de Produtos</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição do Produto</label>
+                    <input type="text" id="descricao" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="valor" class="form-label">Valor Unitário</label>
+                    <input type="number" id="valor" class="form-control" step="0.01">
+                </div>
+                <div class="mb-3">
+                    <label for="quantidade" class="form-label">Quantidade</label>
+                    <input type="number" id="quantidade" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <button onclick="adicionarItem()" class="btn btn-primary">Adicionar Item</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-3">Lista de Itens</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Valor Unitário</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaItens">
+                        <!-- Os itens serão listados aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <h3>Total Contábil:</h3>
+                <div id="totalContabil" class="fs-4">R$ 0.00</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabelaItens = document.getElementById('tabelaItens');
+        const totalContabil = document.getElementById('totalContabil');
+
+        let itens = [];
+
+        function adicionarItem() {
+            const descricao = document.getElementById('descricao').value;
+            const valor = parseFloat(document.getElementById('valor').value);
+            const quantidade = parseInt(document.getElementById('quantidade').value);
+
+            if (descricao && !isNaN(valor) && !isNaN(quantidade) && valor > 0 && quantidade > 0) {
+                const item = {
+                    descricao: descricao,
+                    valor: valor,
+                    quantidade: quantidade
+                };
+                itens.push(item);
+                atualizarTabelaItens();
+                calcularTotalContabil();
+                limparCampos();
+            } else {
+                alert('Por favor, preencha todos os campos corretamente.');
+            }
+        }
+
+        function atualizarTabelaItens() {
+            tabelaItens.innerHTML = '';
+            itens.forEach((item, index) => {
+                const row = tabelaItens.insertRow();
+                row.innerHTML = `
+                    <td>${item.descricao}</td>
+                    <td>R$ ${item.valor.toFixed(2)}</td>
+                    <td>${item.quantidade}</td>
+                    <td>
+                        <button onclick="editarItem(${index})" class="btn btn-warning">Editar</button>
+                        <button onclick="removerItem(${index})" class="btn btn-danger">Remover</button>
+                    </td>
+                `;
+            });
+        }
+
+        function limparCampos() {
+            document.getElementById('descricao').value = '';
+            document.getElementById('valor').value = '';
+            document.getElementById('quantidade').value = '';
+        }
+
+        function editarItem(index) {
+            const item = itens[index];
+            document.getElementById('descricao').value = item.descricao;
+            document.getElementById('valor').value = item.valor.toFixed(2);
+            document.getElementById('quantidade').value = item.quantidade;
+            removerItem(index);
+        }
+
+        function removerItem(index) {
+            itens.splice(index, 1);
+            atualizarTabelaItens();
+            calcularTotalContabil();
+        }
+
+        function calcularTotalContabil() {
+            let total = 0;
+            itens.forEach(item => {
+                total += item.valor * item.quantidade;
+            });
+            totalContabil.textContent = `R$ ${total.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens de Gatos</title>
+    <link rel="stylesheet" href="gatinhoCss.css">
+</head>
+<body>
+    <div>
+        <h1>Imagens de Gatos</h1>
+        <button id="gerarNovasImagens">Gerar 10 Novas Imagens de Gatos</button>
+        <div class="grid-container" id="gridGatos">
+        </div>
+    </div>
+    <script>
+        const gridGatos = document.getElementById('gridGatos');
+        const gerarNovasImagensButton = document.getElementById('gerarNovasImagens');
+
+        function carregarImagensDeGatos() {
+            fetch('https://api.thecatapi.com/v1/images/search?limit=10')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(gato => {
+                        const card = document.createElement('div');
+                        card.classList.add('card');
+                        card.innerHTML = `
+                            <img src="${gato.url}" alt="Gato">
+                        `;
+                        gridGatos.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar imagens de gatos:', error);
+                });
+        }
+
+        carregarImagensDeGatos();
+
+        gerarNovasImagensButton.addEventListener('click', () => {
+            gridGatos.innerHTML = '';
+
+            carregarImagensDeGatos();
+        });
+    </script>
+</body>
+</html>

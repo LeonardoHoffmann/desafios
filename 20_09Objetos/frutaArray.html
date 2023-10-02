@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="fruta" class="form-label">Informe uma fruta</label>
+                <input type="text" id="fruta" class="form-control" placeholder="Informe fruta">
+            </div>
+            <div class="col-md-6">
+                <button onclick="inserir(); carregar()" class="btn btn-danger mt-4">Inserir</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button onclick="carregar()" class="btn btn-success">Carregar</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <ul>
+            <!--Pegar os dados do array-->
+        </ul>
+    </div>
+    
+
+    <script>
+        var frutas = ["maça","pera","tangerina","bergamota"]
+
+        /*console.log(frutas)
+
+        frutas.push("laranja")
+        console.log(frutas)
+
+        frutas.unshift("Limão")
+        console.log(frutas)
+
+        frutas.pop()
+        console.log(frutas)
+
+        frutas.shift()
+        console.log(frutas)*/
+       /* console.log(frutas.length)
+        var size = frutas.length
+            for(let i = 0; i < size; i++){
+                console.log(frutas[i])
+            }
+        */
+
+        function carregar(){
+            var size = frutas.length
+            var itens = ''
+            for(let i = 0; i < size; i++){
+               //itens += `<li>${frutas[i]}</li>`
+               itens += '<li>'+frutas[i]+'</li>'
+            }
+            document.getElementsByTagName('ul')[0].innerHTML = itens
+        }
+
+        function inserir(){
+            let novaFruta = document.getElementById('fruta')
+
+            if(novaFruta.value == ''){
+                alert('Você precisa informar o nome da fruta')
+                novaFruta.focus()
+                return
+            }
+
+           /* if(existeFruta(novaFruta.value)){
+               alert('Esta fruta já está na cesta')
+               novaFruta.focus()
+               return
+            }*/
+           
+           /* if(frutas.includes(novaFruta.value)){
+               alert('Esta fruta já está na cesta')
+               novaFruta.focus()
+               return
+            }*/
+            let indice = frutas.indexOf(novaFruta.value)
+            //alert(indice)
+            if( indice >= 0){
+               alert('Esta fruta já está na cesta')
+               novaFruta.focus()
+               return
+            }
+
+            frutas.push(novaFruta.value)
+             novaFruta.value = ''             
+        }
+
+       /* function existeFruta(item){
+            var size = frutas.length
+            for(let i = 0; i < size; i++){
+               if(item == frutas[i]){
+                  return true
+               }
+            }
+            return false
+        }*/
+
+    </script>
+</body>
+</html>

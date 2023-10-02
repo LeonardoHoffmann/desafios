@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem de Gato</title>
+    <link rel="stylesheet" href="gatinCss.css">
+</head>
+<body>
+    <div>
+        <h1>Imagem de Gato</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Clique em "Obter Nova Imagem" para receber uma imagem de um Gatinho!!!</h5>
+                <button id="PImagemGato">Obter Nova Imagem</button>
+                <div id="ImagemGato" class="card-text">
+                    <img src="" alt="Imagem de Gato" id="ImagemGatoSrc">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ImagemGatoElemento = document.getElementById('ImagemGatoSrc');
+        const ImagemGatoBotao = document.getElementById('PImagemGato');
+
+        function fetchImagemGato() {
+            fetch('https://api.thecatapi.com/v1/images/search')
+                .then(response => response.json())
+                .then(data => {
+                    const imagemUrl = data[0].url;
+                    ImagemGatoElemento.src = imagemUrl;
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar imagem de gato:', error);
+                });
+        }
+
+        ImagemGatoBotao.addEventListener('click', fetchImagemGato);
+
+        fetchImagemGato();
+    </script>
+</body>
+</html>
