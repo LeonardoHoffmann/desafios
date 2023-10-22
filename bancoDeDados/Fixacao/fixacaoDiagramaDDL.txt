@@ -1,0 +1,141 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_funcionarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tb_funcionarios` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `cargo` VARCHAR(45) NOT NULL,
+  `salario` DECIMAL NOT NULL,
+  `data_contratacao` DATE NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_clientes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tb_clientes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(85) NOT NULL,
+  `endereco` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_venda`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tb_venda` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `data_venda` DATE NOT NULL,
+  `tb_funcionarios_id` INT NOT NULL,
+  `tb_clientes_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_tb_venda_tb_funcionarios1_idx` (`tb_funcionarios_id` ASC) VISIBLE,
+  INDEX `fk_tb_venda_tb_clientes1_idx` (`tb_clientes_id` ASC) VISIBLE,
+  CONSTRAINT `fk_tb_venda_tb_funcionarios1`
+    FOREIGN KEY (`tb_funcionarios_id`)
+    REFERENCES `mydb`.`tb_funcionarios` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tb_venda_tb_clientes1`
+    FOREIGN KEY (`tb_clientes_id`)
+    REFERENCES `mydb`.`tb_clientes` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_categorias`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tb_categorias` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(85) NOT NULL,
+  `descricao` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_fornecedores`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tb_fornecedores` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(85) NOT NULL,
+  `endereco` VARCHAR(255) NOT NULL,
+  `telefone` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_produtos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tb_produtos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(85) NOT NULL,
+  `preco` DECIMAL(10,2) NOT NULL,
+  `descricao` VARCHAR(255) NULL,
+  `estoque` DECIMAL NOT NULL,
+  `tb_categorias_id` INT NOT NULL,
+  `tb_fornecedores_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_tb_produtos_tb_categorias1_idx` (`tb_categorias_id` ASC) VISIBLE,
+  INDEX `fk_tb_produtos_tb_fornecedores1_idx` (`tb_fornecedores_id` ASC) VISIBLE,
+  CONSTRAINT `fk_tb_produtos_tb_categorias1`
+    FOREIGN KEY (`tb_categorias_id`)
+    REFERENCES `mydb`.`tb_categorias` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tb_produtos_tb_fornecedores1`
+    FOREIGN KEY (`tb_fornecedores_id`)
+    REFERENCES `mydb`.`tb_fornecedores` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_ItensVendas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tb_ItensVendas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantidade` INT NOT NULL,
+  `tb_venda_id` INT NOT NULL,
+  `tb_produtos_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_tb_itensVendas_tb_venda1_idx` (`tb_venda_id` ASC) VISIBLE,
+  INDEX `fk_tb_itensVendas_tb_produtos1_idx` (`tb_produtos_id` ASC) VISIBLE,
+  CONSTRAINT `fk_tb_itensVendas_tb_venda1`
+    FOREIGN KEY (`tb_venda_id`)
+    REFERENCES `mydb`.`tb_venda` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tb_itensVendas_tb_produtos1`
+    FOREIGN KEY (`tb_produtos_id`)
+    REFERENCES `mydb`.`tb_produtos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -1,0 +1,29 @@
+/* SELECT
+    P.nome AS NomeDoProduto,
+    IV.quantidade AS QuantidadeVendida,
+    P.preco AS ValorUnitario
+FROM tb_produtos P
+INNER JOIN tb_itensvendas IV ON P.id = IV.tb_produtos_id; */
+
+/* SELECT
+   V.data_venda AS DataVenda,
+   C.nome AS NomeDoCliente
+FROM  tb_venda V
+INNER JOIN tb_clientes C ON C.id = V.tb_clientes_id; */
+
+/* SELECT
+   P.id AS Codigo,
+   P.descricao AS Descricao,
+   C.nome AS NomeDaCategoria,
+   F.nome AS NomeDeFornecedores
+FROM tb_produtos P
+INNER JOIN tb_categorias C ON C.id = P.tb_categorias_id
+INNER JOIN tb_fornecedores F ON F.id = P.tb_fornecedores_id; */
+
+/*INSERT INTO `mydb`.`tb_categorias` ( `nome`) VALUES ( 'Eletronicos');
+INSERT INTO `mydb`.`tb_fornecedores` ( `nome`, `endereco`, `telefone`) VALUES ( 'João', 'Rua XV de Setembro', '3333-2019');
+INSERT INTO `mydb`.`tb_produtos` ( `nome`, `preco`, `estoque`, `tb_categorias_id`, `tb_fornecedores_id`) VALUES ( 'Ar-Condicionado',1400,1000,1,1);
+INSERT INTO `mydb`.`tb_clientes` ( `nome`, `endereco`) VALUES ( 'Maria', 'Rua VII de Setembro');
+INSERT INTO `mydb`.`tb_funcionarios` ( `nome`, `cargo`,`salario`,`data_contratacao`) VALUES ( 'Zariel', 'Vendedor',4000,DATE('2011-11-11'));
+INSERT INTO `mydb`.`tb_venda` ( `data_venda`, `tb_funcionarios_id`, `tb_clientes_id`) VALUES ( DATE('2023-12-10'),1,1);
+INSERT INTO `mydb`.`tb_itensvendas` ( `quantidade`, `tb_venda_id`, `tb_produtos_id`) VALUES (2,1,1);*/
